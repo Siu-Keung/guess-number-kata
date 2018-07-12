@@ -11,6 +11,9 @@ import org.mockito.internal.creation.bytebuddy.MockAccess;
 import tw.core.exception.AnswerFormatIncorrectException;
 import tw.core.model.Record;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -93,6 +96,15 @@ public class AnswerTest {
         Record record = actualAnswer.check(mockAnswer);
 
         assertThat(record.getValue(), is("2A0B"));
+    }
+
+    @Test
+    public void should_get_2_when_input_is_1234(){
+        Answer answer = Answer.createAnswer("1 2 3 4");
+
+        int result = answer.getIndexOfNum("3");
+
+        assertThat(result, is(2));
     }
 
 
