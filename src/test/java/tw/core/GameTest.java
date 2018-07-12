@@ -5,10 +5,15 @@ package tw.core;/*
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.NotNull;
+import tw.core.exception.OutOfGuessCountException;
 import tw.core.generator.AnswerGenerator;
 import tw.core.model.GuessResult;
+
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,15 +43,23 @@ public class GameTest {
     }
 
     @Test
-    public void should_get_the_FAIL_status_when_guess_input_is_wrong() throws Exception {
+    public void should_get_the_3A0B_status_when_guess_input_is_wrong() throws Exception {
         Answer answer = Answer.createAnswer("1 2 3 5");
 
         GuessResult guess = game.guess(answer);
         String result = guess.getResult();
 
         assertThat(result, is("3A0B"));
-
     }
 
+    @Test
+    public void should_get_input_when_call_guessHistory() throws Exception{
+        Answer answer = Answer.createAnswer("1 2 3 5");
+
+        GuessResult guess = game.guess(answer);
+        List<GuessResult> history = game.guessHistory();
+
+        assertThat(history.get(0).getInputAnswer(), is(answer));
+    }
 
 }
