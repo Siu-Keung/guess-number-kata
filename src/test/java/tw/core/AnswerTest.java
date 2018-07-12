@@ -7,12 +7,16 @@ import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.creation.bytebuddy.MockAccess;
 import tw.core.exception.AnswerFormatIncorrectException;
+import tw.core.model.Record;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by jxzhong on 2017/9/23.
@@ -63,6 +67,19 @@ public class AnswerTest {
             return;
         }
         Assertions.fail("输入数字大于9，应当抛异常");
+    }
+
+    @Test
+    public void should_get_true_value_when_input_correct(){
+        Answer mockAnswer = mock(Answer.class);
+        when(mockAnswer.getIndexOfNum("1")).thenReturn(0);
+        when(mockAnswer.getIndexOfNum("2")).thenReturn(1);
+        when(mockAnswer.getIndexOfNum("3")).thenReturn(2);
+        when(mockAnswer.getIndexOfNum("4")).thenReturn(3);
+
+        Record record = actualAnswer.check(mockAnswer);
+
+        assertThat(record.getValue(), is("4A0B"));
     }
 
 
