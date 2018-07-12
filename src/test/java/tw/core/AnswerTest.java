@@ -54,6 +54,16 @@ public class AnswerTest {
         Assertions.fail("输入含有字符，应当抛异常");
     }
 
+    @Test
+    public void should_throw_exception_when_num_greater_than_9(){
+        Answer answer = Answer.createAnswer("1 2 13 4");
+        try {
+            answer.validate();
+        } catch (AnswerFormatIncorrectException e) {
+            return;
+        }
+        Assertions.fail("输入数字大于9，应当抛异常");
+    }
 
 
 }
