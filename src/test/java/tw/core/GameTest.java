@@ -8,9 +8,7 @@ import org.mockito.internal.matchers.NotNull;
 import tw.core.exception.OutOfGuessCountException;
 import tw.core.generator.AnswerGenerator;
 import tw.core.model.GuessResult;
-
 import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyString;
