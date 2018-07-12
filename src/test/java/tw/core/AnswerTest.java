@@ -41,7 +41,19 @@ public class AnswerTest {
         } catch (AnswerFormatIncorrectException e) {
             Assertions.fail("不应当抛异常");
         }
-
     }
+
+    @Test
+    public void should_throw_exception_when_contain_char(){
+        Answer answer = Answer.createAnswer("1 2, 3 4");
+        try {
+            answer.validate();
+        } catch (Exception e) {
+            return;
+        }
+        Assertions.fail("输入含有字符，应当抛异常");
+    }
+
+
 
 }
