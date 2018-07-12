@@ -1,6 +1,9 @@
 package tw.core;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tw.core.model.GuessResult;
 import tw.validator.InputValidator;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -52,5 +55,18 @@ public class InputValidatorTest {
         Boolean isValidated = inputValidator.validate(num);
         //then
         assertThat(isValidated, is(false));
+    }
+
+    @Test
+    public void should_get_the_FAIL_status_when_guess_input_is_wrong() throws Exception {
+        InputValidator inputValidator = new InputValidator();
+        String input = "1, 2, 3, 4";
+
+        try {
+            boolean result = inputValidator.validate(input);
+        }catch (RuntimeException e){
+            return;
+        }
+        Assertions.fail("此处应当抛异常");
     }
 }
